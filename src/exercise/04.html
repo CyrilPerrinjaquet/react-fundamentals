@@ -11,14 +11,72 @@
 
     // 🐨 use that function in place of the divs below with:
     // 💰 {message({children: 'Hello World'})} {message({children: 'Goodbye World'})}
+
     const element = (
       <div className="container">
-        <div className="message">Hello World</div>
-        <div className="message">Goodbye World</div>
+        {message({children: 'Hello World'})}
+        {message({children: 'Goodbye World'})}
       </div>
-    )
+    );
+
+    function message({children}) {
+      return <div className="message">{children}</div>;
+    }
 
     // 💯 This is only the first step to making actual React components. The rest is in the extra credit!
-    ReactDOM.createRoot(document.getElementById('root')).render(element)
+    ReactDOM.createRoot(document.getElementById('root')).render(element);
   </script>
 </body>
+
+<!-- Extra Credit 
+
+    01
+
+    const firstElement = React.createElement(message, {children: "Hello World"})
+    const secondElement = React.createElement(message, {children: "Goodbye World"})
+
+    02
+    
+    <Message children="Hello World"/>
+    <Message children="Goodbye World"/>
+
+    03 
+
+    ====== In production the propTypes validation doesn't run, it only runs in a development environment
+    
+    function Message({subject, greeting}) {
+      return (
+        <div className="message">
+          {greeting}, {subject}
+        </div>
+      );
+    }
+
+    const PropTypes = {
+      string(props, propName, componentName) {
+        if (typeof props[propName] !== 'number') {
+          return new Error(
+            'ERROR, the subject and/or the greeting must be a string.',
+          );
+        }
+      },
+    };
+
+    Message.propTypes = {
+      greeting: PropTypes.string,
+      subject: PropTypes.string
+    };
+
+
+    04
+
+    <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+
+    05
+
+    <>
+      {message({children: 'Hello World'})}
+      {message({children: 'Goodbye World'})}
+    </>
+    
+-->
